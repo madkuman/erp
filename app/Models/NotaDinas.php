@@ -19,4 +19,9 @@ class NotaDinas extends Model
     {
         return $this->belongsTo(UsulanDetail::class, 'usulan_detail_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

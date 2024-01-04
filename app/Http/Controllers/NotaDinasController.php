@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NotaDinas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotaDinasController extends Controller
 {
@@ -14,7 +15,6 @@ class NotaDinasController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -35,7 +35,25 @@ class NotaDinasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // return $request->file('file')->store('nota_dinas');
+
+        $validatedData = $request->validate([
+            'tanggal' => "required",
+            'perihal' => "required",
+            'file' => 'file|max:1024|mimes:pdf'
+        ]);
+
+        if ($request->file('file')) {
+            $validatedData['file'] = $request->file('file')->store('nota_dinas');
+        }
+
+        $validatedData['created_by'] = Auth::user()->id;
+        $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
+
+        NotaDinas::create($validatedData);
+
+        return redirect()->back()->with('success', 'Berhasil menambah data nota dinas');
     }
 
     /**

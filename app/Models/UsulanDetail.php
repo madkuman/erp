@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Barang;
 use App\Models\Usulan;
 use App\Models\UnitKerja;
+use App\Models\PengadaanDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -26,5 +28,10 @@ class UsulanDetail extends Model
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'barang_id');
+    }
+
+    public function pengadaan_detail()
+    {
+        return $this->hasOne(PengadaanDetail::class, 'usulan_detail_id');
     }
 }

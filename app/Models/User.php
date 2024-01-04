@@ -54,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Usulan::class, 'created_by');
     }
+
+    /**
+     * Get all of the nota_dinas for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function nota_dinas()
+    {
+        return $this->hasMany(NotaDinas::class, 'created_by');
+    }
 }

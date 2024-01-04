@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UsulanDetail;
+use App\Models\Pengadaan;
+use App\Models\PengadaanDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class DPAController extends Controller
+
+class PengadaanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +17,9 @@ class DPAController extends Controller
      */
     public function index()
     {
-        $data_dpa = UsulanDetail::doesntHave('pengadaan_detail')
-            ->whereNotNull('verified_at')->get();
-
-        return view('dpa.index', compact('data_dpa'));
+        return view('pengadaan.index', [
+            'data_pengadaan' => Pengadaan::all(),
+        ]);
     }
 
     /**
@@ -38,7 +40,27 @@ class DPAController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $nama_pengadaan = $request->input('nama');
+        $usulan_details = $request->input('selectedItems');
+
+        if (!empty($usulan_details)) {
+            $pengadaan = new Pengadaan();
+            $pengadaan->nama = $nama_pengadaan;
+            $pengadaan->created_by = Auth::user()->id;
+            $pengadaan->save();
+        } else {
+            return redirect()->back()->with('error', 'Pilih setidaknya satu data untuk diproses.');
+        }
+
+        foreach ($usulan_details as $usulan_detail) {
+            $detail = new PengadaanDetail();
+            $detail->pengadaan_id = $pengadaan->id;
+            $detail->usulan_detail_id = $usulan_detail;
+            $detail->save();
+        }
+
+        return redirect('/pengadaan')->with('success', 'Paket pengadaan baru berhasil ditambahkan.');
     }
 
     /**
@@ -49,7 +71,7 @@ class DPAController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('pengadaan.view');
     }
 
     /**

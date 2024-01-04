@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\NotaDinas;
 use App\Models\Usulan;
 use App\Models\UsulanDetail;
 use Illuminate\Http\Request;
@@ -83,9 +84,12 @@ class UsulanDetailController extends Controller
     {
         $data = UsulanDetail::with('usulan', 'barang')
             ->find($id);
+        $data_nota_dinas = NotaDinas::with('user')->get();
+        // dd($data_nota_dinas);
 
         return view('usulan_detail.view', [
             'data' => $data,
+            'data_nota_dinas' => $data_nota_dinas
         ]);
     }
 }

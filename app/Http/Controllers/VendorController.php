@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UsulanDetail;
 use Illuminate\Http\Request;
 
-class DPAController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,7 @@ class DPAController extends Controller
      */
     public function index()
     {
-        $data_dpa = UsulanDetail::doesntHave('pengadaan_detail')
-            ->whereNotNull('verified_at')->get();
-
-        return view('dpa.index', compact('data_dpa'));
+        //
     }
 
     /**

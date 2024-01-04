@@ -3,7 +3,8 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Detail Usulan #{{ $data->id }}: {{ $data->barang->nama }}</h3>
+            <h3 class="card-title">Detail Pengadaan #{{ $data->usulan_detail->id }}: {{ $data->usulan_detail->barang->nama }}
+            </h3>
 
             <div class="card-tools">
                 <a href="#" class="btn btn-sm btn-warning">Edit</a>
@@ -19,7 +20,8 @@
                             <div class="info-box bg-light">
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Jumlah Barang</span>
-                                    <span class="info-box-number text-center text-muted mb-0">{{ $data->jumlah }}
+                                    <span
+                                        class="info-box-number text-center text-muted mb-0">{{ $data->usulan_detail->jumlah }}
                                         {{ $data->satuan }}</span>
                                 </div>
                             </div>
@@ -29,7 +31,7 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Pagu Harga Satuan</span>
                                     <span class="info-box-number text-center text-muted mb-0">Rp.
-                                        {{ number_format($data->harga) }}</span>
+                                        {{ number_format($data->usulan_detail->harga) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +40,7 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Pagu Total</span>
                                     <span class="info-box-number text-center text-muted mb-0">Rp.
-                                        {{ number_format($data->jumlah * $data->harga) }}</span>
+                                        {{ number_format($data->usulan_detail->jumlah * $data->usulan_detail->harga) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -71,38 +73,20 @@
                         <div class="col-12">
                             <div class="card ">
                                 <div class="card-header p-2">
-
-                                    {{-- <ul class="nav nav-pills">
+                                    <ul class="nav nav-pills">
                                         <li class="nav-item"><a class="nav-link" href="#nota_dinas" data-toggle="tab">Nota
                                                 Dinas</a></li>
                                         <li class="nav-item"><a class="nav-link" href="#penawaran"
                                                 data-toggle="tab">Penawaran</a></li>
                                         <li class="nav-item"><a class="nav-link" href="#spk" data-toggle="tab">SPK</a>
                                         </li>
-                                    </ul> --}}
+                                    </ul>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="home-tab" data-toggle="tab"
-                                                data-target="#nota_dinas" type="button" role="tab" aria-controls="home"
-                                                aria-selected="true">Nota Dinas</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-toggle="tab"
-                                                data-target="#penawaran" type="button" role="tab"
-                                                aria-controls="profile" aria-selected="false">Penawaran</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#spk"
-                                                type="button" role="tab" aria-controls="contact"
-                                                aria-selected="false">SPK</button>
-                                        </li>
-                                    </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane" id="nota_dinas">
-                                            <a href="#" class="btn btn-success btn-sm m-2" data-toggle="modal"
-                                                data-target="#staticBackdrop">Tambah Nota Dinas</a>
+                                            <a href="#" class="btn btn-success btn-sm mb-2" data-toggle="modal"
+                                                data-target="#staticBackdrop">Tambah</a>
                                             <table class="table">
                                                 <thead>
                                                     <tr>
@@ -115,27 +99,23 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($data_nota_dinas as $nota_dinas)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $nota_dinas->tanggal }}</td>
-                                                            <td>{{ $nota_dinas->user['name'] }}</td>
-                                                            <td>{{ $nota_dinas->perihal }}</td>
-                                                            <td>
-                                                                @if ($nota_dinas->file)
-                                                                    <a href="{{ asset('/storage/' . $nota_dinas->file) }}"
-                                                                        class="btn btn-primary btn-sm">Buka File</a>
-                                                                @endif
-                                                            </td>
-                                                            <td></td>
-                                                        </tr>
-                                                    @endforeach
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                                            <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="penawaran">
-                                            <a href="#" class="btn btn-success btn-sm m-2" data-toggle="modal"
+                                            <a href="#" class="btn btn-success btn-sm mb-2" data-toggle="modal"
                                                 data-target="#staticBackdrop">Tambah</a>
                                             <table class="table">
                                                 <thead>
@@ -148,13 +128,23 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                                            <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <!-- /.tab-pane -->
+
                                         <div class="tab-pane" id="spk">
-                                            <a href="#" class="btn btn-success btn-sm m-2" data-toggle="modal"
+                                            <a href="#" class="btn btn-success btn-sm mb-2" data-toggle="modal"
                                                 data-target="#staticBackdrop">Tambah</a>
                                             <table class="table">
                                                 <thead>
@@ -168,7 +158,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                                            <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -181,18 +181,20 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-2 order-1 order-md-2">
-                    <h3 class="text-primary"><i class="fas fa-paint-brush"></i> {{ $data->usulan->nama_usulan }}</h3>
-                    <p class="text-muted"></p>
+                    <h3 class="text-primary"><i class="fas fa-paint-brush"></i>
+                        {{ $data->usulan_detail->usulan->nama_usulan }}</h3>
+                    <p class="text-muted">{{ $data->usulan_detail->justifikasi }}</p>
                     <br>
                     <div class="text-muted">
                         <p class="text-sm">Justifikasi
-                            <b class="d-block">{{ $data->justifikasi }}</b>
+                            <b class="d-block">{{ $data->usulan_detail->justifikasi }}</b>
                         </p>
                         <p class="text-sm">Unit Pengusul
-                            <b class="d-block">{{ $data->usulan->unit_kerja->nama }}</b>
+                            <b class="d-block">{{ $data->usulan_detail->usulan->unit_kerja->nama }}</b>
                         </p>
                         <p class="text-sm">Dibuat oleh
-                            <b class="d-block">{{ $data->usulan->user->name }}<br /> {{ $data->created_at }}</br>
+                            <b class="d-block">{{ $data->usulan_detail->usulan->user->name }}<br />
+                                {{ $data->usulan_detail->created_at }}</br>
                         </p>
                     </div>
 
@@ -234,40 +236,40 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Nota Dinas</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="/nota_dinas" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <input type="hidden" name="usulan_detail_id" name="usulan_detail_id"
-                            value="{{ $data->id }}">
+                <div class="modal-body">
+                    <form method="post" action="" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
-                            <label for="tanggal">Tanggal Nota Dinas</label>
-                            <input type="date" class="form-control" name="tanggal" id="tanggal" required>
+                            <label for="tanggal">Tanggal Nodin</label>
+                            <input type="date" class="form-control" name="tanggal" id="tanggal">
                         </div>
                         <div class="form-group">
                             <label for="perihal">Perihal</label>
-                            <input type="text" class="form-control" name="perihal" id="perihal" required>
+                            <input type="text" class="form-control" name="perihal" id="perihal">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">File input</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile"
-                                        name="file">
-                                    <label class="custom-file-label" for="exampleInputFile">Pilih file PDF</label>
+                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </div>
             </div>
         </div>
     </div>

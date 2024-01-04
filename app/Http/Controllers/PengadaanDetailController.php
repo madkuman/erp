@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UsulanDetail;
+use App\Models\PengadaanDetail;
 use Illuminate\Http\Request;
 
-class DPAController extends Controller
+class PengadaanDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $data_dpa = UsulanDetail::doesntHave('pengadaan_detail')
-            ->whereNotNull('verified_at')->get();
-
-        return view('dpa.index', compact('data_dpa'));
+        $pengadaan_detail = PengadaanDetail::with('pengadaan', 'usulan_detail')->where('pengadaan_id', $id)->get();
+        // dd($pengadaan_detail);
+        return view('pengadaan_detail.index', compact('pengadaan_detail'));
     }
 
     /**
@@ -84,5 +83,15 @@ class DPAController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function view($id)
+    {
+        $data = PengadaanDetail::with('pengadaan', 'usulan_detail')
+            ->find($id);
+
+        return view('pengadaan_detail.view', [
+            'data' => $data,
+        ]);
     }
 }

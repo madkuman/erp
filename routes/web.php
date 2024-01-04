@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Barang;
+use App\Models\UnitKerja;
+use App\Models\PengadaanDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DPAController;
 use App\Http\Controllers\UserController;
@@ -9,11 +12,12 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\UsulanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\KodeRekeningController;
+use App\Http\Controllers\NotaDinasController;
 use App\Http\Controllers\UsulanDetailController;
-use App\Models\Barang;
-use App\Models\UnitKerja;
+use App\Http\Controllers\PengadaanDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,5 +64,11 @@ Route::post('/usulan-detail/store', [UsulanDetailController::class, 'store'])->n
 Route::post('/usulan-detail/verifikasi', [UsulanDetailController::class, 'verifikasi'])->name('verifikasi-usulan-detail')->middleware('auth');
 Route::get('/usulan-detail/view/{id}', [UsulanDetailController::class, 'view'])->name('view-usulan-detail')->middleware('auth');
 
+Route::resource('/pengadaan', PengadaanController::class)->middleware('auth');
 
-Route::get('/dpa', [DPAController::class, 'index'])->name('dpa')->middleware('auth');
+Route::resource('/dpa', DPAController::class)->middleware('auth');
+// Route::resource('/pengadaan_detail', PengadaanDetail::class)->middleware('auth');
+Route::get('/pengadaan-detail/{id}', [PengadaanDetailController::class, 'index'])->name('pengadaan-detail')->middleware('auth');
+Route::get('/pengadaan-detail/view/{id}', [PengadaanDetailController::class, 'view'])->name('view-pengadaan-detail')->middleware('auth');
+
+Route::resource('/nota_dinas', NotaDinasController::class)->middleware('auth');

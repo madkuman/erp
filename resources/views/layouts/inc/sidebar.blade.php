@@ -300,16 +300,24 @@
                 </li>
                 <li class="nav-header">PENGADAAN</li>
                 <li class="nav-item">
-                    <a href="{{ route('dpa') }}" class="nav-link">
+                    <a href="/dpa" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             DPA
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/pengadaan" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Paket Pengadaan
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">KEUANGAN</li>
                 <li class="nav-item">
-                    <a href="{{ route('dpa') }}" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Bayar
