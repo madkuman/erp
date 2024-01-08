@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\PengadaanDetail;
+use App\Models\Pengadaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PengadaanDetailController extends Controller
 {
@@ -15,7 +17,7 @@ class PengadaanDetailController extends Controller
     public function index($id)
     {
         $pengadaan_detail = PengadaanDetail::with('pengadaan', 'usulan_detail')->where('pengadaan_id', $id)->get();
-        // dd($pengadaan_detail);
+
         return view('pengadaan_detail.index', compact('pengadaan_detail'));
     }
 

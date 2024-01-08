@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\NotaDinas;
+use App\Models\Penawaran;
+use App\Models\SPK;
 use App\Models\Usulan;
 use App\Models\UsulanDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Carbon;
 
 class UsulanDetailController extends Controller
 {
@@ -77,19 +80,37 @@ class UsulanDetailController extends Controller
 
     public function destroy($id)
     {
-        //
+        $usulan_id = UsulanDetail::select('usulan_id')->where('id', $id)->get();
+        UsulanDetail::destroy($id);
+
+        return redirect()->route('usulan-detail', $usulan_id)->with('success', 'Data berhasil dihapus.');
     }
 
     public function view($id)
     {
         $data = UsulanDetail::with('usulan', 'barang')
             ->find($id);
-        $data_nota_dinas = NotaDinas::with('user')->get();
-        // dd($data_nota_dinas);
+        $data_nota_dinas = NotaDinas::with('user')->where('usulan_detail_id', $id)->get();
+        $data_penawaran = Penawaran::with('user')->where('usulan_detail_id', $id)->get();
+        $data_spk = SPK::with('user')->where('usulan_detail_id', $id)->get();
 
         return view('usulan_detail.view', [
             'data' => $data,
-            'data_nota_dinas' => $data_nota_dinas
+            'data_nota_dinas' => $data_nota_dinas,
+            'data_penawaran' => $data_penawaran,
+            'data_spk' => $data_spk
         ]);
+    }
+
+    public function verifikasi(Request $request)
+    {
+        $usulan_detail_id = $request->input('usulan_detail_id');
+        UsulanDetail::where('id', $usulan_detail_id)
+            ->update([
+                'verified_at' => Carbon::now(),
+                'verified_by' => Auth::user()->id
+            ]);
+
+        return redirect()->back()->with('success', 'Usulan berhasil diverifikasi.');
     }
 }

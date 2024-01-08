@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NotaDinas;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class NotaDinasController extends Controller
+class PembelianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +13,7 @@ class NotaDinasController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -35,28 +34,7 @@ class NotaDinasController extends Controller
      */
     public function store(Request $request)
     {
-
-        // return $request->file('file')->store('nota_dinas');
-
-        $validatedData = $request->validate([
-            'tanggal' => "required",
-            'perihal' => "required",
-            'file' => 'file|max:1024|mimes:pdf,jpg,png'
-        ]);
-
-        if ($request->file('file')) {
-            $validatedData['file'] = $request->file('file')->store('nota_dinas');
-        }
-
-        $validatedData['created_by'] = Auth::user()->id;
-        $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
-
-        NotaDinas::create($validatedData);
-
-        return redirect()->back()->with([
-            'success' => 'Berhasil menambah data nota dinas',
-            'tab' => 'nota_dinas'
-        ]);
+        //
     }
 
     /**
@@ -67,9 +45,7 @@ class NotaDinasController extends Controller
      */
     public function show($id)
     {
-        $data_nota_dinas = NotaDinas::where('usulan_detail_id', $id)->get();
-
-        return $data_nota_dinas;
+        //
     }
 
     /**
@@ -103,11 +79,6 @@ class NotaDinasController extends Controller
      */
     public function destroy($id)
     {
-        NotaDinas::find($id)->update([
-            'deleted_by' => Auth::user()->id
-        ]);
-        NotaDinas::destroy($id);
-
-        return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        //
     }
 }

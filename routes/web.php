@@ -5,6 +5,7 @@ use App\Models\UnitKerja;
 use App\Models\PengadaanDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DPAController;
+use App\Http\Controllers\SPKController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
@@ -12,12 +13,14 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\UsulanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotaDinasController;
+use App\Http\Controllers\PenawaranController;
 use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\KodeRekeningController;
-use App\Http\Controllers\NotaDinasController;
 use App\Http\Controllers\UsulanDetailController;
 use App\Http\Controllers\PengadaanDetailController;
+use App\Models\UsulanDetail;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +66,7 @@ Route::get('/usulan-detail/create/{id}', [UsulanDetailController::class, 'create
 Route::post('/usulan-detail/store', [UsulanDetailController::class, 'store'])->name('store-usulan-detail')->middleware('auth');
 Route::post('/usulan-detail/verifikasi', [UsulanDetailController::class, 'verifikasi'])->name('verifikasi-usulan-detail')->middleware('auth');
 Route::get('/usulan-detail/view/{id}', [UsulanDetailController::class, 'view'])->name('view-usulan-detail')->middleware('auth');
+Route::delete('/usulan-detail/{id}', [UsulanDetailController::class, 'destroy'])->name('delete-usulan-detail')->middleware('auth');
 
 Route::resource('/pengadaan', PengadaanController::class)->middleware('auth');
 
@@ -72,3 +76,5 @@ Route::get('/pengadaan-detail/{id}', [PengadaanDetailController::class, 'index']
 Route::get('/pengadaan-detail/view/{id}', [PengadaanDetailController::class, 'view'])->name('view-pengadaan-detail')->middleware('auth');
 
 Route::resource('/nota_dinas', NotaDinasController::class)->middleware('auth');
+Route::resource('/penawaran', PenawaranController::class)->middleware('auth');
+Route::resource('/spk', SPKController::class)->middleware('auth');

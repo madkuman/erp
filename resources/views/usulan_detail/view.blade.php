@@ -7,8 +7,25 @@
 
             <div class="card-tools">
                 <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                <a href="#" class="btn btn-sm btn-danger">Hapus</a>
-                <a href="#" class="btn btn-sm btn-primary">Verifikasi</a>
+                {{-- <form action="{{ route('delete-usulan-detail', $data->id) }}" method="post" class="d-inline">
+                    @method('DELETE')
+                    @csrf
+                    <input type="hidden" name="usulan_id" value="{{ $data_usulan->id }}">
+                    <button type="submit" onclick="return confirm('Apakah yakin ingin menghapus data?')"
+                        class="btn btn-danger btn-sm">Hapus</button>
+                </form> --}}
+                @if (!empty($data->verified_at))
+                    <button type="button" class="btn btn-sm btn-primary" disabled>Verified</button>
+                @else
+                    {{-- <a href="{{ route('verifikasi-usulan-detail', $data->id) }}" class="btn btn-sm btn-primary"
+                        onclick="return confirm('Apakah yakin ingin memverifikasi usulan ini?')">Verifikasi</a> --}}
+                    <form action="{{ route('verifikasi-usulan-detail') }}" method="post" class="d-inline">
+                        @csrf
+                        <input type="hidden" name="usulan_detail_id" value="{{ $data->id }}">
+                        <button type="submit" class="btn btn-sm btn-primary"
+                            onclick="return confirm('Apakah yakin ingin memverifikasi usulan ini?')">Verifikasi</button>
+                    </form>
+                @endif
             </div>
         </div>
         <div class="card-body">
@@ -45,6 +62,14 @@
                         <div class="col-12 col-sm-2">
                             <div class="info-box bg-light">
                                 <div class="info-box-content">
+                                    <span class="info-box-text text-center text-muted">Jumlah Beli</span>
+                                    <span class="info-box-number text-center text-muted mb-0">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2">
+                            <div class="info-box bg-light">
+                                <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Terbayar</span>
                                     <span class="info-box-number text-center text-muted mb-0">Rp. 0</span>
                                 </div>
@@ -55,14 +80,6 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Sisa Anggaran</span>
                                     <span class="info-box-number text-center text-muted mb-0">Rp. 0</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                            <div class="info-box bg-light">
-                                <div class="info-box-content">
-                                    <span class="info-box-text text-center text-muted">Status</span>
-                                    <span class="info-box-number text-center text-muted mb-0">Selesai</span>
                                 </div>
                             </div>
                         </div>
@@ -84,12 +101,12 @@
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="home-tab" data-toggle="tab"
+                                            <button class="nav-link" id="contact-tab" data-toggle="tab"
                                                 data-target="#nota_dinas" type="button" role="tab" aria-controls="home"
                                                 aria-selected="true">Nota Dinas</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-toggle="tab"
+                                            <button class="nav-link" id="contact-tab" data-toggle="tab"
                                                 data-target="#penawaran" type="button" role="tab"
                                                 aria-controls="profile" aria-selected="false">Penawaran</button>
                                         </li>
@@ -98,81 +115,35 @@
                                                 type="button" role="tab" aria-controls="contact"
                                                 aria-selected="false">SPK</button>
                                         </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-toggle="tab"
+                                                data-target="#pembelian" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">Pembelian</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-toggle="tab"
+                                                data-target="#penerimaan" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">Penerimaan</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-toggle="tab"
+                                                data-target="#uji_fungsi" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">Uji Fungsi</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-toggle="tab"
+                                                data-target="#pembayaran" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">Pembayaran</button>
+                                        </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div class="tab-pane" id="nota_dinas">
-                                            <a href="#" class="btn btn-success btn-sm m-2" data-toggle="modal"
-                                                data-target="#staticBackdrop">Tambah Nota Dinas</a>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 5%">#</th>
-                                                        <th style="width: 15%">Tanggal Nota Dinas</th>
-                                                        <th style="width: 15%">Dibuat Oleh</th>
-                                                        <th style="width: 35%">Perihal</th>
-                                                        <th style="width: 15%">File</th>
-                                                        <th style="width: 15%">Opsi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($data_nota_dinas as $nota_dinas)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $nota_dinas->tanggal }}</td>
-                                                            <td>{{ $nota_dinas->user['name'] }}</td>
-                                                            <td>{{ $nota_dinas->perihal }}</td>
-                                                            <td>
-                                                                @if ($nota_dinas->file)
-                                                                    <a href="{{ asset('/storage/' . $nota_dinas->file) }}"
-                                                                        class="btn btn-primary btn-sm">Buka File</a>
-                                                                @endif
-                                                            </td>
-                                                            <td></td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="penawaran">
-                                            <a href="#" class="btn btn-success btn-sm m-2" data-toggle="modal"
-                                                data-target="#staticBackdrop">Tambah</a>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Nama Vendor</th>
-                                                        <th>Tanggal Penawaran</th>
-                                                        <th>File</th>
-                                                        <th style="width: 15%">Opsi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="spk">
-                                            <a href="#" class="btn btn-success btn-sm m-2" data-toggle="modal"
-                                                data-target="#staticBackdrop">Tambah</a>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 5%">#</th>
-                                                        <th style="width: 15%">Tanggal Nota Dinas</th>
-                                                        <th style="width: 15%">Pengirim</th>
-                                                        <th style="width: 35%">Perihal</th>
-                                                        <th style="width: 15%">Penerima</th>
-                                                        <th style="width: 15%">Opsi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
+                                        @include('usulan_detail.contents.nota_dinas.index')
+                                        @include('usulan_detail.contents.penawaran.index')
+                                        @include('usulan_detail.contents.spk.index')
+                                        @include('usulan_detail.contents.pembelian.index')
+                                        @include('usulan_detail.contents.penerimaan')
+                                        @include('usulan_detail.contents.uji_fungsi')
+                                        @include('usulan_detail.contents.pembayaran')
                                     </div>
                                     <!-- /.tab-content -->
                                 </div><!-- /.card-body -->
@@ -228,52 +199,4 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Nota Dinas</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="post" action="/nota_dinas" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <input type="hidden" name="usulan_detail_id" name="usulan_detail_id"
-                            value="{{ $data->id }}">
-                        <div class="form-group">
-                            <label for="tanggal">Tanggal Nota Dinas</label>
-                            <input type="date" class="form-control" name="tanggal" id="tanggal" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="perihal">Perihal</label>
-                            <input type="text" class="form-control" name="perihal" id="perihal" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile"
-                                        name="file">
-                                    <label class="custom-file-label" for="exampleInputFile">Pilih file PDF</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-    </script>
 @endsection

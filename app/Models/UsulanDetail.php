@@ -8,10 +8,14 @@ use App\Models\UnitKerja;
 use App\Models\PengadaanDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UsulanDetail extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $table = 'usulan_detail';
     protected $guarded = ['id'];
 

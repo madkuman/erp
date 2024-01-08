@@ -62,6 +62,33 @@ class User extends Authenticatable
      */
     public function nota_dinas()
     {
-        return $this->hasMany(NotaDinas::class, 'created_by');
+        return $this->hasMany(NotaDinas::class, [
+            'created_by', 'updated_by', 'deleted_by'
+        ]);
+    }
+    /**
+     * Get all of the nota_dinas for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function penawaran()
+    {
+        return $this->hasMany(Penawaran::class, [
+            'created_by', 'updated_by', 'deleted_by'
+        ]);
+    }
+
+    public function spk()
+    {
+        return $this->hasMany(SPK::class, [
+            'created_by', 'updated_by', 'deleted_by'
+        ]);
+    }
+
+    public function pembelian()
+    {
+        return $this->hasMany(SPK::class, [
+            'created_by', 'updated_by', 'deleted_by'
+        ]);
     }
 }

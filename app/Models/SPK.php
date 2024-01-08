@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\UsulanDetail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class NotaDinas extends Model
+class SPK extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $table = 'nota_dinas';
+    protected $table = 'spk';
     protected $guarded = ['id'];
 
     public function usulan_detail()
