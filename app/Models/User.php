@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\SPK;
+use App\Models\Usulan;
+use App\Models\NotaDinas;
+use App\Models\Pembelian;
+use App\Models\Penawaran;
+use App\Models\Penerimaan;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -87,8 +93,27 @@ class User extends Authenticatable
 
     public function pembelian()
     {
-        return $this->hasMany(SPK::class, [
+        return $this->hasMany(Pembelian::class, [
             'created_by', 'updated_by', 'deleted_by'
         ]);
+    }
+
+    public function penerimaan()
+    {
+        return $this->hasMany(Penerimaan::class, [
+            'created_by', 'updated_by', 'deleted_by'
+        ]);
+    }
+
+    public function uji_fungsi()
+    {
+        return $this->hasMany(UjiFungsi::class, [
+            'created_by', 'updated_by', 'deleted_by'
+        ]);
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasMany(Pembayaran::class, 'created_by');
     }
 }

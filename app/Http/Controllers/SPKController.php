@@ -53,7 +53,7 @@ class SPKController extends Controller
 
         return redirect()->back()->with([
             'success' => 'Berhasil menambah SPK',
-            'tab' => 'penawaran'
+            'tab' => 'spk'
         ]);
     }
 

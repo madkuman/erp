@@ -18,8 +18,12 @@ use App\Http\Controllers\PenawaranController;
 use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\KodeRekeningController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PenerimaanController;
 use App\Http\Controllers\UsulanDetailController;
 use App\Http\Controllers\PengadaanDetailController;
+use App\Http\Controllers\UjiFungsiController;
 use App\Models\UsulanDetail;
 
 /*
@@ -68,13 +72,16 @@ Route::post('/usulan-detail/verifikasi', [UsulanDetailController::class, 'verifi
 Route::get('/usulan-detail/view/{id}', [UsulanDetailController::class, 'view'])->name('view-usulan-detail')->middleware('auth');
 Route::delete('/usulan-detail/{id}', [UsulanDetailController::class, 'destroy'])->name('delete-usulan-detail')->middleware('auth');
 
-Route::resource('/pengadaan', PengadaanController::class)->middleware('auth');
-
-Route::resource('/dpa', DPAController::class)->middleware('auth');
 // Route::resource('/pengadaan_detail', PengadaanDetail::class)->middleware('auth');
 Route::get('/pengadaan-detail/{id}', [PengadaanDetailController::class, 'index'])->name('pengadaan-detail')->middleware('auth');
 Route::get('/pengadaan-detail/view/{id}', [PengadaanDetailController::class, 'view'])->name('view-pengadaan-detail')->middleware('auth');
 
+Route::resource('/dpa', DPAController::class)->middleware('auth');
+Route::resource('/pengadaan', PengadaanController::class)->middleware('auth');
 Route::resource('/nota_dinas', NotaDinasController::class)->middleware('auth');
 Route::resource('/penawaran', PenawaranController::class)->middleware('auth');
 Route::resource('/spk', SPKController::class)->middleware('auth');
+Route::resource('/pembelian', PembelianController::class)->middleware('auth');
+Route::resource('/penerimaan', PenerimaanController::class)->middleware('auth');
+Route::resource('/uji_fungsi', UjiFungsiController::class)->middleware('auth');
+Route::resource('/pembayaran', PembayaranController::class)->middleware('auth');

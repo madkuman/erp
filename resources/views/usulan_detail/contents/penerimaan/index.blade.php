@@ -1,15 +1,14 @@
-<div class="tab-pane" id="pembelian">
+<div class="tab-pane" id="penerimaan">
     <a href="#" class="btn btn-primary btn-sm mt-2 mb-2" data-toggle="modal"
-        data-target="#staticBackdrop_pembelian">Tambah
-        Pembelian</a>
+        data-target="#staticBackdrop_penerimaan">Tambah Penerimaan</a>
     <table class="table">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Tanggal Pembelian</th>
                 <th>Jumlah Beli</th>
-                <th>Harga Beli</th>
-                <th>Proses</th>
+                <th>Total Harga Beli</th>
+                <th>Opsi</th>
             </tr>
         </thead>
         <tbody>
@@ -20,19 +19,7 @@
                     <td>{{ $item->jumlah_beli }}</td>
                     <td>Rp. {{ number_format($item->harga_beli) }}</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm mt-2 mb-2" data-toggle="modal"
-                            data-target="#staticBackdrop_penerimaan">
-                            Buat Penerimaan
-                        </button>
-                        <button type="button" class="btn btn-warning btn-sm mt-2 mb-2" data-toggle="modal"
-                            data-target="#staticBackdrop_uji_fungsi">
-                            Buat Uji Fungsi
-                        </button>
-                        <button type="button" class="btn btn-secondary btn-sm mt-2 mb-2" data-toggle="modal"
-                            data-target="#staticBackdrop_pembayaran">
-                            Buat Pembayaran
-                        </button>
-                        <form action="/pembelian/{{ $item->id }}" method="post" class="d-inline">
+                        <form action="/penerimaan/{{ $item->id }}" method="post">
                             @method('DELETE')
                             @csrf
                             <button type="submit" onclick="return confirm('Apakah yakin ingin menghapus data?')"
@@ -45,35 +32,41 @@
     </table>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop_pembelian" data-backdrop="static" data-keyboard="false" tabindex="-1"
+<div class="modal fade" id="staticBackdrop_penerimaan" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Transaksi Pembelian</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Penerimaan Gudang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="/pembelian" enctype="multipart/form-data">
+            <form method="post" action="/penerimaan" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="usulan_detail_id" name="usulan_detail_id" value="{{ $data->id }}">
                     <div class="form-group">
-                        <label for="tanggal">Tanggal Pembelian</label>
+                        <label for="tanggal">Tanggal Penerimaan</label>
                         <input type="date" class="form-control" name="tanggal" id="tanggal" required>
                     </div>
                     <div class="form-group">
-                        <label for="jumlah_beli">Jumlah Beli</label>
-                        <input type="number" class="form-control" name="jumlah_beli" id="jumlah_beli" required>
+                        <label for="jumlah_penerimaan">Jumlah Diterima</label>
+                        <input type="number" class="form-control" name="jumlah_penerimaan" id="jumlah_penerimaan"
+                            required>
                     </div>
                     <div class="form-group">
-                        <label for="harga_beli">Harga Beli</label>
-                        <input type="number" class="form-control" name="harga_beli" id="harga_beli" required>
+                        <label for="nomor_surat_jalan">Nomor Surat Jalan</label>
+                        <input type="text" class="form-control" name="nomor_surat_jalan" id="nomor_surat_jalan"
+                            required>
                     </div>
                     <div class="form-group">
-                        <label for="link">Link</label>
-                        <input type="text" class="form-control" name="link" id="link">
+                        <label for="pengirim">Pengirim</label>
+                        <input type="text" class="form-control" name="pengirim" id="pengirim" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="penerima">Penerima</label>
+                        <input type="text" class="form-control" name="penerima" id="penerima">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">File</label>

@@ -13,7 +13,7 @@ class Pembelian extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $table = 'penawaran';
+    protected $table = 'pembelian';
     protected $guarded = ['id'];
 
     public function pengadaan_detail()
@@ -24,5 +24,20 @@ class Pembelian extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by', 'updated_by', 'deleted_by');
+    }
+
+    public function penerimaan()
+    {
+        return $this->hasOne(Penerimaan::class, 'pembelian_id', 'id');
+    }
+
+    public function uji_fungsi()
+    {
+        return $this->hasOne(UjiFungsi::class, 'pembelian_id', 'id');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'pembelian_id', 'id');
     }
 }

@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\NotaDinas;
+use App\Models\Pembelian;
 use App\Models\Penawaran;
+use App\Models\Penerimaan;
 use App\Models\SPK;
+use App\Models\UjiFungsi;
+use App\Models\Pembayaran;
 use App\Models\Usulan;
 use App\Models\UsulanDetail;
 use Illuminate\Http\Request;
@@ -88,17 +92,35 @@ class UsulanDetailController extends Controller
 
     public function view($id)
     {
-        $data = UsulanDetail::with('usulan', 'barang')
-            ->find($id);
+        $data = UsulanDetail::with('usulan', 'barang')->find($id);
+        $jumlah_terbeli = Pembelian::where('usulan_detail_id', $id)->sum('jumlah_beli');
         $data_nota_dinas = NotaDinas::with('user')->where('usulan_detail_id', $id)->get();
         $data_penawaran = Penawaran::with('user')->where('usulan_detail_id', $id)->get();
         $data_spk = SPK::with('user')->where('usulan_detail_id', $id)->get();
+        $data_pembelian = Pembelian::with('user')->where('usulan_detail_id', $id)->get();
+        $data_penerimaan = Penerimaan::with('user')->where('usulan_detail_id', $id)->get();
+        $data_penerimaan = Pembelian::with('user')->where('usulan_detail_id', $id)->get();
+        $data_uji_fungsi = UjiFungsi::with('user')->where('usulan_detail_id', $id)->get();
+        $data_pembayaran = Pembayaran::with('user')->where('usulan_detail_id', $id)->get();
+        $data_terbayar = Pembayaran::with('user')->where('usulan_detail_id', $id)->sum('nilai_pembayaran');
+
+        //Menghitung sisa anggaran
+        $total_pagu = $data->jumlah * $data->harga;
+        $data_sisa_anggaran = $total_pagu - $data_terbayar;
 
         return view('usulan_detail.view', [
             'data' => $data,
+            'total_pagu' => $total_pagu,
+            'jumlah_terbeli' => $jumlah_terbeli,
             'data_nota_dinas' => $data_nota_dinas,
             'data_penawaran' => $data_penawaran,
-            'data_spk' => $data_spk
+            'data_spk' => $data_spk,
+            'data_pembelian' => $data_pembelian,
+            'data_penerimaan' => $data_penerimaan,
+            'data_uji_fungsi' => $data_uji_fungsi,
+            'data_pembayaran' => $data_pembayaran,
+            'data_terbayar' => $data_terbayar,
+            'data_sisa_anggaran' => $data_sisa_anggaran
         ]);
     }
 

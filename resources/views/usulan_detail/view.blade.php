@@ -6,8 +6,8 @@
             <h3 class="card-title">Detail Usulan #{{ $data->id }}: {{ $data->barang->nama }}</h3>
 
             <div class="card-tools">
-                <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                {{-- <form action="{{ route('delete-usulan-detail', $data->id) }}" method="post" class="d-inline">
+                {{-- <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                <form action="{{ route('delete-usulan-detail', $data->id) }}" method="post" class="d-inline">
                     @method('DELETE')
                     @csrf
                     <input type="hidden" name="usulan_id" value="{{ $data_usulan->id }}">
@@ -55,23 +55,24 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Pagu Total</span>
                                     <span class="info-box-number text-center text-muted mb-0">Rp.
-                                        {{ number_format($data->jumlah * $data->harga) }}</span>
+                                        {{ number_format($total_pagu) }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-2">
                             <div class="info-box bg-light">
                                 <div class="info-box-content">
-                                    <span class="info-box-text text-center text-muted">Jumlah Beli</span>
-                                    <span class="info-box-number text-center text-muted mb-0">0</span>
+                                    <span class="info-box-text text-center text-muted">Jumlah Terbeli</span>
+                                    <span class="info-box-number text-center text-muted mb-0">{{ $jumlah_terbeli }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-2">
                             <div class="info-box bg-light">
                                 <div class="info-box-content">
-                                    <span class="info-box-text text-center text-muted">Terbayar</span>
-                                    <span class="info-box-number text-center text-muted mb-0">Rp. 0</span>
+                                    <span class="info-box-text text-center text-muted">Total Terbayar</span>
+                                    <span class="info-box-number text-center text-muted mb-0">Rp.
+                                        {{ number_format($data_terbayar) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,8 @@
                             <div class="info-box bg-light">
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Sisa Anggaran</span>
-                                    <span class="info-box-number text-center text-muted mb-0">Rp. 0</span>
+                                    <span class="info-box-number text-center text-muted mb-0">Rp.
+                                        {{ number_format($data_sisa_anggaran) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -141,9 +143,9 @@
                                         @include('usulan_detail.contents.penawaran.index')
                                         @include('usulan_detail.contents.spk.index')
                                         @include('usulan_detail.contents.pembelian.index')
-                                        @include('usulan_detail.contents.penerimaan')
-                                        @include('usulan_detail.contents.uji_fungsi')
-                                        @include('usulan_detail.contents.pembayaran')
+                                        @include('usulan_detail.contents.penerimaan.index')
+                                        @include('usulan_detail.contents.uji_fungsi.index')
+                                        @include('usulan_detail.contents.pembayaran.index')
                                     </div>
                                     <!-- /.tab-content -->
                                 </div><!-- /.card-body -->
@@ -167,7 +169,7 @@
                         </p>
                     </div>
 
-                    <h5 class="mt-5 text-muted">File Pengadaan</h5>
+                    {{-- <h5 class="mt-5 text-muted">File Pengadaan</h5>
                     <ul class="list-unstyled">
                         <li>
                             <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>
@@ -189,7 +191,7 @@
                             <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>
                                 Contract-10_12_2014.docx</a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <div class="text-center mt-5 mb-3">
 
                     </div>
