@@ -50,6 +50,7 @@ class PenerimaanController extends Controller
             'penerima' => 'required'
         ]);
 
+        //Validasi total penerimaan tidak boleh melebihi total pembelian
         if ($request->jumlah_penerimaan > $request->jumlah_beli) {
             return redirect()->back()->with('error', 'Jumlah penerimaan tidak boleh lebih dari jumlah yang dibeli.');
         }
@@ -67,10 +68,12 @@ class PenerimaanController extends Controller
         $validatedData['created_by'] = Auth::user()->id;
 
         Penerimaan::create($validatedData);
+        $data_penerimaan = Penerimaan::all();
 
-        return redirect()->route('/penerimaan')->with([
+        return redirect()->route('index-penerimaan')->with([
             'success' => 'Berhasil menambah penerimaan',
-            'tab' => 'penerimaan'
+            'tab' => 'penerimaan',
+            'data_penerimaan' => $data_penerimaan
         ]);
     }
 
@@ -82,7 +85,8 @@ class PenerimaanController extends Controller
      */
     public function show($id)
     {
-        //
+        $data_penerimaan = Penerimaan::with('pembelian')->where('pembelian_id', $id)->first();
+        return view('penerimaan.detail', compact('data_penerimaan'));
     }
 
     /**

@@ -24,4 +24,9 @@ class UjiFungsi extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function pembelian()
+    {
+        return $this->belongsTo(Pembelian::class, 'pembelian_id', 'id');
+    }
 }

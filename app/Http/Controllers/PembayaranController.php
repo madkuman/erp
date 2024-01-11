@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
+use App\Models\Pembelian;
+use App\Models\Penerimaan;
+use App\Models\UjiFungsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +18,13 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        //
+        $data_pembelian = Pembelian::all();
+        $barang_belum_bayar = Pembelian::whereDoesntHave('pembayaran')->get();
+
+        return view('pembayaran.index', [
+            'data_pembelian' => $data_pembelian,
+            'barang_belum_bayar' => $barang_belum_bayar
+        ]);
     }
 
     /**
@@ -23,9 +32,11 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $pembelian = Pembelian::find($id);
+
+        return view('pembayaran.create', compact('pembelian'));
     }
 
     /**
@@ -54,12 +65,13 @@ class PembayaranController extends Controller
             $validatedData['file'] = $request->file('file')->store('pembayaran');
         }
 
-        $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
+        // $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
+        $validatedData['pembelian_id'] = $request->input('pembelian_id');
         $validatedData['created_by'] = Auth::user()->id;
 
         Pembayaran::create($validatedData);
 
-        return redirect()->back()->with([
+        return redirect()->route('index-pembayaran')->with([
             'success' => 'Berhasil menambah data pembayaran',
             'tab' => 'pembayaran'
         ]);
@@ -73,7 +85,15 @@ class PembayaranController extends Controller
      */
     public function show($id)
     {
-        //
+        $data_penerimaan = Penerimaan::with('pembelian')->where('pembelian_id', $id)->first();
+        $data_uji_fungsi = UjiFungsi::with('pembelian')->where('pembelian_id', $id)->first();
+        $data_pembayaran = Pembayaran::with('pembelian')->where('pembelian_id', $id)->first();
+
+        return view('uji_fungsi.detail', [
+            'data_penerimaan' => $data_penerimaan,
+            'data_uji_fungsi' => $data_uji_fungsi,
+            'data_pembayaran' => $data_pembayaran
+        ]);
     }
 
     /**

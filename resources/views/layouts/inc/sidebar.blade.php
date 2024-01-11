@@ -325,7 +325,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/pengadaan" class="nav-link">
+                    <a href="/uji_fungsi" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Uji Fungsi
@@ -334,7 +334,7 @@
                 </li>
                 <li class="nav-header">KEUANGAN</li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="/pembayaran" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Pembayaran

@@ -5,9 +5,9 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-header" style="text-align: center">
-                        Form Terima Barang
+                        Form Pembayaran
                     </div>
-                    <form method="post" action="{{ route('store-penerimaan') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('store-pembayaran') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -20,33 +20,43 @@
                                             value="{{ $pembelian->id_paket }}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tanggal">Tanggal Penerimaan</label>
-                                        <input type="date" class="form-control" name="tanggal" id="tanggal" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="jumlah_penerimaan">Jumlah Diterima</label>
-                                        <input type="number" class="form-control" name="jumlah_penerimaan"
-                                            id="jumlah_penerimaan" required>
+                                        <label for="tanggal_pembayaran">Tanggal Pembayaran</label>
+                                        <input type="date" class="form-control" name="tanggal_pembayaran"
+                                            id="tanggal_pembayaran" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="pengirim">Pengirim</label>
-                                        <input type="text" class="form-control" name="pengirim" id="pengirim" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="penerima">Penerima</label>
-                                        <input type="text" class="form-control" name="penerima" id="penerima">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nomor_surat_jalan">Nomor Surat Jalan</label>
-                                        <input type="text" class="form-control" name="nomor_surat_jalan"
-                                            id="nomor_surat_jalan" required>
+                                        <label for="nilai_pembayaran">Nilai Pembayaran</label>
+                                        <input type="number" class="form-control" name="nilai_pembayaran"
+                                            id="nilai_pembayaran" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Invoice</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="exampleInputFile"
+                                                    name="invoice">
+                                                <label class="custom-file-label" for="exampleInputFile">Pilih
+                                                    file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Kuitansi</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="exampleInputFile"
+                                                    name="kuitansi">
+                                                <label class="custom-file-label" for="exampleInputFile">Pilih
+                                                    file</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="exampleInputFile">File</label>
                                         <div class="input-group">
@@ -58,12 +68,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="link">Keterangan</label>
-                                        <textarea name="keterangan" id="" cols="30" rows="5" class="form-control"></textarea>
-                                    </div>
                                 </div>
                             </div>
+                            <a href="{{ route('index-pembayaran') }}" class="btn btn-default">Kembali</a>
                             <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                     </form>

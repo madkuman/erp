@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\UjiFungsi;
+use App\Models\Pembelian;
+use App\Models\Penerimaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,10 @@ class UjiFungsiController extends Controller
      */
     public function index()
     {
-        //
+        $data_pembelian = Pembelian::all();
+        $barang_belum_uji_fungsi = Pembelian::whereDoesntHave('uji_fungsi')->get();
+
+        return view('uji_fungsi.index', compact('data_pembelian', 'barang_belum_uji_fungsi'));
     }
 
     /**
@@ -23,9 +28,11 @@ class UjiFungsiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $pembelian = Pembelian::find($id);
+
+        return view('uji_fungsi.create', compact('pembelian'));
     }
 
     /**
@@ -51,13 +58,14 @@ class UjiFungsiController extends Controller
         }
 
         $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
+        $validatedData['pembelian_id'] = $request->input('pembelian_id');
         $validatedData['link'] = $request->input('link');
         $validatedData['keterangan'] = $request->input('keterangan');
         $validatedData['created_by'] = Auth::user()->id;
 
         UjiFungsi::create($validatedData);
 
-        return redirect()->back()->with([
+        return redirect()->route('index-uji-fungsi')->with([
             'success' => 'Berhasil menambah data uji fungsi',
             'tab' => 'uji fungsi'
         ]);
@@ -71,7 +79,13 @@ class UjiFungsiController extends Controller
      */
     public function show($id)
     {
-        //
+        $data_penerimaan = Penerimaan::with('pembelian')->where('pembelian_id', $id)->first();
+        $data_uji_fungsi = UjiFungsi::with('pembelian')->where('pembelian_id', $id)->first();
+
+        return view('uji_fungsi.detail', [
+            'data_penerimaan' => $data_penerimaan,
+            'data_uji_fungsi' => $data_uji_fungsi
+        ]);
     }
 
     /**

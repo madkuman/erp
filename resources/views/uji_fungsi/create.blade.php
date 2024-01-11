@@ -5,9 +5,9 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-header" style="text-align: center">
-                        Form Terima Barang
+                        Form Uji fungsi
                     </div>
-                    <form method="post" action="{{ route('store-penerimaan') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('store-uji-fungsi') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -20,28 +20,19 @@
                                             value="{{ $pembelian->id_paket }}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tanggal">Tanggal Penerimaan</label>
-                                        <input type="date" class="form-control" name="tanggal" id="tanggal" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="jumlah_penerimaan">Jumlah Diterima</label>
-                                        <input type="number" class="form-control" name="jumlah_penerimaan"
-                                            id="jumlah_penerimaan" required>
+                                        <label for="tanggal_uji_fungsi">Tanggal Uji Fungsi</label>
+                                        <input type="date" class="form-control" name="tanggal_uji_fungsi"
+                                            id="tanggal_uji_fungsi" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="pengirim">Pengirim</label>
-                                        <input type="text" class="form-control" name="pengirim" id="pengirim" required>
+                                        <label for="link">Link Bukti</label>
+                                        <input type="text" class="form-control" name="link" id="link" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="penerima">Penerima</label>
-                                        <input type="text" class="form-control" name="penerima" id="penerima">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nomor_surat_jalan">Nomor Surat Jalan</label>
-                                        <input type="text" class="form-control" name="nomor_surat_jalan"
-                                            id="nomor_surat_jalan" required>
+                                        <label for="status">Status</label>
+                                        <input type="text" class="form-control" name="status" id="status">
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +55,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <a href="{{ route('index-uji-fungsi') }}" class="btn btn-default">Kembali</a>
                             <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                     </form>

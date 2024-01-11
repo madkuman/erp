@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Penerimaan Barang</h3>
+                        <h3 class="card-title">Uji Fungsi Barang</h3>
                         <div class="card-tools">
                         </div>
                     </div>
@@ -35,14 +35,14 @@
                                         <td>Rp. {{ number_format($item->harga_beli) }}</td>
                                         <td>{{ $item->keterangan }}</td>
                                         <td>
-                                            @if ($barang_belum_diterima->contains($item))
-                                                <a href="{{ route('create-penerimaan', $item->id) }}"
+                                            @if ($barang_belum_uji_fungsi->contains($item))
+                                                <a href="{{ route('create-uji-fungsi', $item->id) }}"
                                                     class="btn btn-sm btn-primary">Proses
-                                                    Terima</a>
+                                                    Uji Fungsi</a>
                                             @else
-                                                <a href="{{ route('detail-penerimaan', $item->id) }}"
+                                                <a href="{{ route('detail-uji-fungsi', $item->id) }}"
                                                     class="btn btn-sm btn-info">Detail</a>
-                                                <span class="badge badge-info">Barang sudah diterima</span>
+                                                <span class="badge badge-info">Barang sudah diuji fungsi.</span>
                                             @endif
                                         </td>
                                     </tr>

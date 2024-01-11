@@ -83,7 +83,21 @@ Route::resource('/nota_dinas', NotaDinasController::class)->middleware('auth');
 Route::resource('/penawaran', PenawaranController::class)->middleware('auth');
 Route::resource('/spk', SPKController::class)->middleware('auth');
 Route::resource('/pembelian', PembelianController::class)->middleware('auth');
+
+Route::get('/penerimaan', [PenerimaanController::class, 'index'])->name('index-penerimaan')->middleware('auth');
 Route::get('/penerimaan/create/{id}', [PenerimaanController::class, 'create'])->name('create-penerimaan')->middleware('auth');
-Route::resource('/penerimaan', PenerimaanController::class)->middleware('auth');
-Route::resource('/uji_fungsi', UjiFungsiController::class)->middleware('auth');
-Route::resource('/pembayaran', PembayaranController::class)->middleware('auth');
+Route::get('/penerimaan/detail/{id}', [PenerimaanController::class, 'show'])->name('detail-penerimaan')->middleware('auth');
+Route::post('/penerimaan/store', [PenerimaanController::class, 'store'])->name('store-penerimaan')->middleware('auth');
+//Route::resource('/penerimaan', PenerimaanController::class)->middleware('auth');
+
+Route::get('/uji-fungsi', [UjiFungsiController::class, 'index'])->name('index-uji-fungsi')->middleware('auth');
+Route::get('/uji_fungsi/create/{id}', [UjiFungsiController::class, 'create'])->name('create-uji-fungsi')->middleware('auth');
+Route::get('/uji_fungsi/detail/{id}', [UjiFungsiController::class, 'show'])->name('detail-uji-fungsi')->middleware('auth');
+Route::post('/uji_fungsi/store', [UjiFungsiController::class, 'store'])->name('store-uji-fungsi')->middleware('auth');
+// Route::resource('/uji_fungsi', UjiFungsiController::class)->middleware('auth');
+
+Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('index-pembayaran')->middleware('auth');
+Route::get('/pembayaran/create/{id}', [PembayaranController::class, 'create'])->name('create-pembayaran')->middleware('auth');
+Route::get('/pembayaran/detail/{id}', [PembayaranController::class, 'show'])->name('detail-pembayaran')->middleware('auth');
+Route::post('/pembayaran/store', [PembayaranController::class, 'store'])->name('store-pembayaran')->middleware('auth');
+// Route::resource('/pembayaran', PembayaranController::class)->middleware('auth');
