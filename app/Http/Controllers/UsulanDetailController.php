@@ -98,10 +98,10 @@ class UsulanDetailController extends Controller
         $data_penawaran = Penawaran::with('user')->where('usulan_detail_id', $id)->get();
         $data_spk = SPK::with('user')->where('usulan_detail_id', $id)->get();
         $data_pembelian = Pembelian::with('user', 'penerimaan')->where('usulan_detail_id', $id)->get();
-        $data_penerimaan = Penerimaan::with('user')->where('usulan_detail_id', $id)->get();
+        // $data_penerimaan = Penerimaan::with('user')->where('usulan_detail_id', $id)->get();
         // $data_penerimaan = Pembelian::with('user')->where('usulan_detail_id', $id)->get();
-        $data_uji_fungsi = UjiFungsi::with('user')->where('usulan_detail_id', $id)->get();
-        $data_pembayaran = Pembayaran::with('user')->where('usulan_detail_id', $id)->get();
+        // $data_uji_fungsi = UjiFungsi::with('user')->where('usulan_detail_id', $id)->get();
+        // $data_pembayaran = Pembayaran::with('user')->where('usulan_detail_id', $id)->get();
         $data_terbayar = Pembayaran::with('user')->where('usulan_detail_id', $id)->sum('nilai_pembayaran');
 
         //Menghitung sisa anggaran
@@ -116,11 +116,11 @@ class UsulanDetailController extends Controller
             'data_penawaran' => $data_penawaran,
             'data_spk' => $data_spk,
             'data_pembelian' => $data_pembelian,
-            'data_penerimaan' => $data_penerimaan,
-            'data_uji_fungsi' => $data_uji_fungsi,
-            'data_pembayaran' => $data_pembayaran,
-            'data_terbayar' => $data_terbayar,
-            'data_sisa_anggaran' => $data_sisa_anggaran
+            // 'data_penerimaan' => $data_penerimaan,
+            // 'data_uji_fungsi' => $data_uji_fungsi,
+            // 'data_pembayaran' => $data_pembayaran,
+            // 'data_terbayar' => $data_terbayar,
+            // 'data_sisa_anggaran' => $data_sisa_anggaran
         ]);
     }
 
