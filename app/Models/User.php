@@ -93,23 +93,17 @@ class User extends Authenticatable
 
     public function pembelian()
     {
-        return $this->hasMany(Pembelian::class, [
-            'created_by', 'updated_by', 'deleted_by'
-        ]);
+        return $this->hasMany(Pembelian::class, 'created_by');
     }
 
     public function penerimaan()
     {
-        return $this->hasMany(Penerimaan::class, [
-            'created_by', 'updated_by', 'deleted_by'
-        ]);
+        return $this->hasMany(Penerimaan::class, 'created_by');
     }
 
     public function uji_fungsi()
     {
-        return $this->hasMany(UjiFungsi::class, [
-            'created_by', 'updated_by', 'deleted_by'
-        ]);
+        return $this->hasMany(UjiFungsi::class, 'created_by');
     }
 
     public function pembayaran()

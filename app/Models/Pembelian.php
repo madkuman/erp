@@ -23,7 +23,7 @@ class Pembelian extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'created_by', 'updated_by', 'deleted_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function penerimaan()
@@ -39,5 +39,10 @@ class Pembelian extends Model
     public function pembayaran()
     {
         return $this->hasOne(Pembayaran::class, 'pembelian_id', 'id');
+    }
+
+    public function usulan_detail()
+    {
+        return $this->belongsTo(UsulanDetail::class, 'usulan_detail_id');
     }
 }

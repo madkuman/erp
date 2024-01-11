@@ -24,6 +24,7 @@ use App\Http\Controllers\PenerimaanController;
 use App\Http\Controllers\UsulanDetailController;
 use App\Http\Controllers\PengadaanDetailController;
 use App\Http\Controllers\UjiFungsiController;
+use App\Models\Penerimaan;
 use App\Models\UsulanDetail;
 
 /*
@@ -82,6 +83,7 @@ Route::resource('/nota_dinas', NotaDinasController::class)->middleware('auth');
 Route::resource('/penawaran', PenawaranController::class)->middleware('auth');
 Route::resource('/spk', SPKController::class)->middleware('auth');
 Route::resource('/pembelian', PembelianController::class)->middleware('auth');
+Route::get('/penerimaan/create/{id}', [PenerimaanController::class, 'create'])->name('create-penerimaan')->middleware('auth');
 Route::resource('/penerimaan', PenerimaanController::class)->middleware('auth');
 Route::resource('/uji_fungsi', UjiFungsiController::class)->middleware('auth');
 Route::resource('/pembayaran', PembayaranController::class)->middleware('auth');

@@ -67,6 +67,7 @@ class PembelianController extends Controller
 
         $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
         $validatedData['tanggal'] = $request->input('tanggal');
+        $validatedData['id_paket'] = $request->input('id_paket');
         $validatedData['link'] = $request->input('link');
         $validatedData['keterangan'] = $request->input('keterangan');
         $validatedData['created_by'] = Auth::user()->id;

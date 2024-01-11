@@ -38,4 +38,9 @@ class UsulanDetail extends Model
     {
         return $this->hasOne(PengadaanDetail::class, 'usulan_detail_id');
     }
+
+    public function pembelian()
+    {
+        return $this->hasMany(Pembelian::class, 'usulan_detail_id');
+    }
 }

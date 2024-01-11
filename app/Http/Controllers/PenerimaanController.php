@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembelian;
 use App\Models\Penerimaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,10 @@ class PenerimaanController extends Controller
      */
     public function index()
     {
-        //
+        $data_pembelian = Pembelian::all();
+        $barang_belum_diterima = Pembelian::whereDoesntHave('penerimaan')->get();
+
+        return view('penerimaan.index', compact('data_pembelian', 'barang_belum_diterima'));
     }
 
     /**
@@ -23,9 +27,11 @@ class PenerimaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $pembelian = Pembelian::find($id);
+
+        return view('penerimaan.create', compact('pembelian'));
     }
 
     /**
@@ -36,6 +42,7 @@ class PenerimaanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
             'tanggal' => "required",
             'jumlah_penerimaan' => 'required|integer|min:1',
@@ -43,19 +50,25 @@ class PenerimaanController extends Controller
             'penerima' => 'required'
         ]);
 
+        if ($request->jumlah_penerimaan > $request->jumlah_beli) {
+            return redirect()->back()->with('error', 'Jumlah penerimaan tidak boleh lebih dari jumlah yang dibeli.');
+        }
+
         if ($request->file('file')) {
             $validatedData['file'] = $request->file('file')->store('penerimaan');
         }
 
-        $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
+        // $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
+        $validatedData['pembelian_id'] = $request->input('pembelian_id');
         $validatedData['nomor_surat_jalan'] = $request->input('nomor_surat_jalan');
         $validatedData['keterangan'] = $request->input('keterangan');
         $validatedData['pengirim'] = $request->input('pengirim');
+        $validatedData['penerima'] = $request->input('penerima');
         $validatedData['created_by'] = Auth::user()->id;
 
         Penerimaan::create($validatedData);
 
-        return redirect()->back()->with([
+        return redirect()->route('/penerimaan')->with([
             'success' => 'Berhasil menambah penerimaan',
             'tab' => 'penerimaan'
         ]);

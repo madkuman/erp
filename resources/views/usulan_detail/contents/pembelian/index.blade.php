@@ -7,6 +7,7 @@
             <tr>
                 <th>#</th>
                 <th>Tanggal Pembelian</th>
+                <th>ID Paket</th>
                 <th>Jumlah Beli</th>
                 <th>Harga Beli</th>
                 <th>Proses</th>
@@ -17,6 +18,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->tanggal }}</td>
+                    <td>{{ $item->id_paket }}</td>
                     <td>{{ $item->jumlah_beli }}</td>
                     <td>Rp. {{ number_format($item->harga_beli) }}</td>
                     <td>
@@ -62,6 +64,10 @@
                     <div class="form-group">
                         <label for="tanggal">Tanggal Pembelian</label>
                         <input type="date" class="form-control" name="tanggal" id="tanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_paket">ID Paket</label>
+                        <input type="text" class="form-control" name="id_paket" id="id_paket">
                     </div>
                     <div class="form-group">
                         <label for="jumlah_beli">Jumlah Beli</label>

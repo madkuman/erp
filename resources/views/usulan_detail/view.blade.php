@@ -113,14 +113,14 @@
                                                 aria-controls="profile" aria-selected="false">Penawaran</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#spk"
-                                                type="button" role="tab" aria-controls="contact"
-                                                aria-selected="false">SPK</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="contact-tab" data-toggle="tab"
                                                 data-target="#pembelian" type="button" role="tab"
                                                 aria-controls="contact" aria-selected="false">Pembelian</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#spk"
+                                                type="button" role="tab" aria-controls="contact"
+                                                aria-selected="false">SPK</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="contact-tab" data-toggle="tab"

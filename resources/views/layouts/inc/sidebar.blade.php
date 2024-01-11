@@ -315,12 +315,29 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header">PERLENGKAPAN</li>
+                <li class="nav-item">
+                    <a href="/penerimaan" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Penerimaan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/pengadaan" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Uji Fungsi
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">KEUANGAN</li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
-                            Bayar
+                            Pembayaran
                         </p>
                     </a>
                 </li>
