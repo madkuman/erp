@@ -90,7 +90,7 @@ Route::get('/penerimaan/detail/{id}', [PenerimaanController::class, 'show'])->na
 Route::post('/penerimaan/store', [PenerimaanController::class, 'store'])->name('store-penerimaan')->middleware('auth');
 //Route::resource('/penerimaan', PenerimaanController::class)->middleware('auth');
 
-Route::get('/uji-fungsi', [UjiFungsiController::class, 'index'])->name('index-uji-fungsi')->middleware('auth');
+Route::get('/uji_fungsi', [UjiFungsiController::class, 'index'])->name('index-uji-fungsi')->middleware('auth');
 Route::get('/uji_fungsi/create/{id}', [UjiFungsiController::class, 'create'])->name('create-uji-fungsi')->middleware('auth');
 Route::get('/uji_fungsi/detail/{id}', [UjiFungsiController::class, 'show'])->name('detail-uji-fungsi')->middleware('auth');
 Route::post('/uji_fungsi/store', [UjiFungsiController::class, 'store'])->name('store-uji-fungsi')->middleware('auth');

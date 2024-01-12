@@ -6,6 +6,7 @@ use App\Models\Pembayaran;
 use App\Models\Pembelian;
 use App\Models\Penerimaan;
 use App\Models\UjiFungsi;
+use App\Models\UsulanDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,14 @@ class PembayaranController extends Controller
             'file' => 'file|max:1024|mimes:pdf,jpg,png'
         ]);
 
+        //Validasi bahwa total nilai pembayaran yg diinput tidak boleh melebihi pagu total
+        $data_usulan_detail = UsulanDetail::find($request->usulan_detail_id);
+        $total_pagu = $data_usulan_detail->jumlah * $data_usulan_detail->harga;
+        $total_terbayar = Pembayaran::where('pembelian_id', $request->pembelian_id)->sum('nilai_pembayaran');
+        if (($request->nilai_pembayaran + $total_terbayar) > $total_pagu) {
+            return redirect()->back()->with('error', 'Jumlah nilai pembayaran akumulasi tidak boleh melebihi pagu anggaran');
+        }
+
         if ($request->file('invoice')) {
             $validatedData['invoice'] = $request->file('invoice')->store('invoice');
         }
@@ -65,7 +74,7 @@ class PembayaranController extends Controller
             $validatedData['file'] = $request->file('file')->store('pembayaran');
         }
 
-        // $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
+        $validatedData['usulan_detail_id'] = $request->input('usulan_detail_id');
         $validatedData['pembelian_id'] = $request->input('pembelian_id');
         $validatedData['created_by'] = Auth::user()->id;
 
