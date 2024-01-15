@@ -22,7 +22,7 @@
                     <td>{{ $item->jumlah_beli }}</td>
                     <td>Rp. {{ number_format($item->harga_beli) }}</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm mt-2 mb-2" data-toggle="modal"
+                        {{-- <button type="button" class="btn btn-success btn-sm mt-2 mb-2" data-toggle="modal"
                             data-target="#staticBackdrop_penerimaan">
                             Buat Penerimaan
                         </button>
@@ -33,7 +33,7 @@
                         <button type="button" class="btn btn-secondary btn-sm mt-2 mb-2" data-toggle="modal"
                             data-target="#staticBackdrop_pembayaran">
                             Buat Pembayaran
-                        </button>
+                        </button> --}}
                         <form action="/pembelian/{{ $item->id }}" method="post" class="d-inline">
                             @method('DELETE')
                             @csrf

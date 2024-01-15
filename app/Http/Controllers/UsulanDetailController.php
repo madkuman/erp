@@ -97,7 +97,7 @@ class UsulanDetailController extends Controller
         $data_nota_dinas = NotaDinas::with('user')->where('usulan_detail_id', $id)->get();
         $data_penawaran = Penawaran::with('user')->where('usulan_detail_id', $id)->get();
         $data_spk = SPK::with('user')->where('usulan_detail_id', $id)->get();
-        $data_pembelian = Pembelian::with('user', 'penerimaan')->where('usulan_detail_id', $id)->get();
+        $data_pembelian = Pembelian::with('user')->where('usulan_detail_id', $id)->get();
         // $data_penerimaan = Penerimaan::with('user')->where('usulan_detail_id', $id)->get();
         // $data_penerimaan = Pembelian::with('user')->where('usulan_detail_id', $id)->get();
         // $data_uji_fungsi = UjiFungsi::with('user')->where('usulan_detail_id', $id)->get();
