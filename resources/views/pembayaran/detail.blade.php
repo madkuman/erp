@@ -5,7 +5,7 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-header">
-                        Detail Uji Fungsi
+                        Detail Pembayaran
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -59,10 +59,30 @@
                                 </dl>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6">
+                                <dl>
+                                    <dt>Tanggal Pembayaran</dt>
+                                    <dd>{{ $data_pembayaran->tanggal_pembayaran }}</dd>
+                                    <dt>Nilai Pembayaran</dt>
+                                    <dd>Rp. {{ number_format($data_pembayaran->nilai_pembayaran) }}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-6">
+                                <dl>
+                                    <dt>Kuitansi</dt>
+                                    <dd>{{ $data_pembayaran->kuitansi }}</dd>
+                                    <dt>File</dt>
+                                    <dd>{{ $data_pembayaran->file }}</dd>
+                                </dl>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-footer">
-                        <a href="/uji-fungsi" class="btn btn-default">Kembali</a>
+                        <a href="/pembayaran" class="btn btn-default">Kembali</a>
                     </div>
                 </div>
             </div>

@@ -57,11 +57,10 @@ class PembayaranController extends Controller
         ]);
 
         //Validasi bahwa total nilai pembayaran yg diinput tidak boleh melebihi pagu total
-        $data_usulan_detail = UsulanDetail::find($request->usulan_detail_id);
-        $total_pagu = $data_usulan_detail->jumlah * $data_usulan_detail->harga;
+        $harga_beli = Pembelian::find($request->pembelian_id);
         $total_terbayar = Pembayaran::where('pembelian_id', $request->pembelian_id)->sum('nilai_pembayaran');
-        if (($request->nilai_pembayaran + $total_terbayar) > $total_pagu) {
-            return redirect()->back()->with('error', 'Jumlah nilai pembayaran akumulasi tidak boleh melebihi pagu anggaran');
+        if (($request->nilai_pembayaran + $total_terbayar) > $harga_beli->harga_beli) {
+            return redirect()->back()->with('error', 'Jumlah nilai pembayaran tidak boleh melebihi harga pembelian');
         }
 
         if ($request->file('invoice')) {
@@ -98,7 +97,7 @@ class PembayaranController extends Controller
         $data_uji_fungsi = UjiFungsi::with('pembelian')->where('pembelian_id', $id)->first();
         $data_pembayaran = Pembayaran::with('pembelian')->where('pembelian_id', $id)->first();
 
-        return view('uji_fungsi.detail', [
+        return view('pembayaran.detail', [
             'data_penerimaan' => $data_penerimaan,
             'data_uji_fungsi' => $data_uji_fungsi,
             'data_pembayaran' => $data_pembayaran

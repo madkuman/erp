@@ -72,7 +72,7 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Total Terbayar</span>
                                     <span class="info-box-number text-center text-muted mb-0">Rp.
-                                        0</span>
+                                        {{ number_format($data_terbayar) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text text-center text-muted">Sisa Anggaran</span>
                                     <span class="info-box-number text-center text-muted mb-0">Rp.
-                                        0</span>
+                                        {{ number_format($data_sisa_anggaran) }}</span>
                                 </div>
                             </div>
                         </div>
