@@ -311,7 +311,7 @@
                     <a href="/pengadaan" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
-                            Paket Pengadaan
+                            RUP
                         </p>
                     </a>
                 </li>

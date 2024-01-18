@@ -21,7 +21,7 @@
                                     <th>Nama Barang</th>
                                     <th>Satuan</th>
                                     <th>Harga</th>
-                                    <th style="width: 5%">Opsi</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,7 +35,8 @@
                                         <td>
                                             <a href="/master/barang/{{ $item->id }}/edit"><i
                                                     class="fas fa-edit"></i></a>
-                                            <form action="/master/barang/{{ $item->id }}" method="post">
+                                            <form action="/master/barang/{{ $item->id }}" method="post"
+                                                class="d-inline">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit"
