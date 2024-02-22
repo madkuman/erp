@@ -77,8 +77,8 @@ Route::delete('/usulan-detail/{id}', [UsulanDetailController::class, 'destroy'])
 Route::get('/pengadaan-detail/{id}', [PengadaanDetailController::class, 'index'])->name('pengadaan-detail')->middleware('auth');
 Route::get('/pengadaan-detail/view/{id}', [PengadaanDetailController::class, 'view'])->name('view-pengadaan-detail')->middleware('auth');
 
-Route::resource('/dpa', DPAController::class)->middleware('auth');
-Route::resource('/pengadaan', PengadaanController::class)->middleware('auth');
+Route::resource('/rup', DPAController::class)->middleware('auth');
+Route::resource('/kontrak', PengadaanController::class)->middleware('auth');
 Route::resource('/nota_dinas', NotaDinasController::class)->middleware('auth');
 Route::resource('/penawaran', PenawaranController::class)->middleware('auth');
 Route::resource('/spk', SPKController::class)->middleware('auth');

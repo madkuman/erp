@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Dokumen Pelaksanaan Anggaran</h3>
+                        <h3 class="card-title">Proses Paket RUP</h3>
                         <div class="card-tools">
 
                         </div>
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <form action="/pengadaan" method="post">
+                    <form action="/kontrak" method="post">
                         <div class="card-body">
                             @csrf
                             <table id="example1" class="table table-bordered table-striped">
@@ -42,7 +42,7 @@
                                             <td>{{ $item->barang->kodeRekening->nama_rekening }}</td>
                                             <td>{{ $item->barang->nama }}</td>
                                             <td>{{ $item->jumlah }} {{ $item->satuan }}</td>
-                                            <td>{{ $item->harga }}</td>
+                                            <td>Rp. {{ number_format($item->harga) }}</td>
                                             <td>Rp. {{ number_format($item->jumlah * $item->harga) }}</td>
                                             <td>
                                                 <a href="{{ $item->link_1 }}" class="badge badge-info">Link 1</a>
@@ -71,9 +71,13 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                        <label for="nama">Nama Kegiatan</label>
+                                        <input type="text" class="form-control" name="nama_kegiatan" id="nama_kegiatan"
+                                            placeholder="Cth: Peningkatan Pelayanan BLUD (WPMK)" required>
                                         <label for="nama">Nama Paket Pengadaan</label>
                                         <input type="text" class="form-control" name="nama" id="nama"
-                                            placeholder="Cth: Pengadaan Barang Laptop" required>
+                                            placeholder="Cth: Belanja Alat/Bahan untuk Kegiatan Kantor-Perabot Kantor"
+                                            required>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

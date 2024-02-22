@@ -298,24 +298,34 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-header">PENGADAAN</li>
+                <li class="nav-header">PP & PPKOM</li>
                 <li class="nav-item">
-                    <a href="/dpa" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            DPA
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/pengadaan" class="nav-link">
+                    <a href="/rup" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             RUP
                         </p>
                     </a>
                 </li>
-                <li class="nav-header">PERLENGKAPAN</li>
+                <li class="nav-header">PENGADAAN</li>
+                <li class="nav-item">
+                    <a href="/kontrak" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Kontrak
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">VERIFIKASI</li>
+                <li class="nav-item">
+                    <a href="/pengadaan" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Proses Verifikasi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">PENERIMAAN</li>
                 <li class="nav-item">
                     <a href="/penerimaan" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
@@ -331,6 +341,7 @@
                             Uji Fungsi
                         </p>
                     </a>
+                </li>
                 </li>
                 <li class="nav-header">KEUANGAN</li>
                 <li class="nav-item">

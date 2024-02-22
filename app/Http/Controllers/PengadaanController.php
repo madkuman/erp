@@ -42,11 +42,13 @@ class PengadaanController extends Controller
     {
         // dd($request);
         $nama_pengadaan = $request->input('nama');
+        $nama_kegiatan = $request->input('nama_kegiatan');
         $usulan_details = $request->input('selectedItems');
 
         if (!empty($usulan_details)) {
             $pengadaan = new Pengadaan();
             $pengadaan->nama = $nama_pengadaan;
+            $pengadaan->nama_kegiatan = $nama_kegiatan;
             $pengadaan->created_by = Auth::user()->id;
             $pengadaan->save();
         } else {
@@ -60,7 +62,7 @@ class PengadaanController extends Controller
             $detail->save();
         }
 
-        return redirect('/pengadaan')->with('success', 'Paket pengadaan baru berhasil ditambahkan.');
+        return redirect('/kontrak')->with('success', 'Paket pengadaan baru berhasil ditambahkan.');
     }
 
     /**
